@@ -86,7 +86,7 @@ function LOGIN() {
 
             </div>
 
-            <div>
+            <div className="checkbox">
               <input type="checkbox" onClick={Save}/>
               <span>Salvar senha</span>
             </div>
