@@ -3,6 +3,7 @@ import Logo from "../../assets/logo.png";
 import Lideranca from "../../assets/lideranca.jpg";
 import "./styles.css";
 
+
 function HOME() {
  return(
      <>
