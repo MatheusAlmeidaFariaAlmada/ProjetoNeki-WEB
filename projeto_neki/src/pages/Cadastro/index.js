@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi"
-import jpIMG from "../../assets/logo.png";
 
 import "./styles.css";
 
@@ -8,6 +7,12 @@ function CADASTRO() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+  const [show, setShow] = useState(false)
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    setShow(!show);
+  }
 
   return (
     <div className="container">
@@ -32,21 +37,49 @@ function CADASTRO() {
             <div className="wrap-input">
               <input
                 className={password !== "" ? "has-val input" : "input"}
-                type="password"
+                type={show ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span className="focus-input" data-placeholder="Password"></span>
+
+              <div className="login-eye">
+                {show ? (
+                  <HiEye
+                    size={20}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <HiEyeOff
+                    size={20}
+                    onClick={handleClick}
+                  />
+                )}
+              </div>
             </div>
 
             <div className="wrap-input">
               <input
                 className={confPassword !== "" ? "has-val input" : "input"}
-                type="password"
+                type={show ? "text" : "password"}
                 value={confPassword}
                 onChange={(e) => setConfPassword(e.target.value)}
               />
               <span className="focus-input" data-placeholder="Confirm Password"></span>
+
+              <div className="login-eye">
+                {show ? (
+                  <HiEye
+                    size={20}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <HiEyeOff
+                    size={20}
+                    onClick={handleClick}
+                  />
+                )}
+              </div>
             </div>
 
             <div className="container-login-form-btn">

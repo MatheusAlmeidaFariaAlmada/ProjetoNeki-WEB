@@ -1,5 +1,5 @@
 import api from "../../services/api.js"
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Logo from "../../assets/logo.png";
 import { Link, Redirect } from 'react-router-dom';
@@ -11,23 +11,35 @@ function LOGIN() {
     login: "",
     password: ""
   });
+  
   const [show, setShow] = useState(false)
+  const [saveSenha, setSaveSenha] = useState(false)
 
   const handleClick = (e) => {
     e.preventDefault()
     setShow(!show);
   }
 
+  useEffect(()=>{
+    setUser({...user, password:localStorage.getItem("password"), login:localStorage.getItem("login")})
+  },[])
+  
   function HandleLogin() {
+    if(saveSenha){
+      localStorage.setItem("password", user.password)
+      localStorage.setItem("login", user.login)
+    }
     api.post("/user/login", user).then((response)=>{
-     /*  localStorage.setItem("password", response)
-      return <Redirect to="/home"/> */
-      console.log(response)
+      return <Redirect to="/home"/>
     }).catch((err)=>{
       console.log(err)
       alert("Usuário não encontrado")
     })
   }
+
+ function Save(){
+   saveSenha === true ? setSaveSenha(false) : setSaveSenha(true)
+ }
 
   return (
     <div className="container">
@@ -72,6 +84,11 @@ function LOGIN() {
                 )}
               </div>
 
+            </div>
+
+            <div>
+              <input type="checkbox" onClick={Save}/>
+              <span>Salvar senha</span>
             </div>
 
             <div className="container-login-form-btn">
