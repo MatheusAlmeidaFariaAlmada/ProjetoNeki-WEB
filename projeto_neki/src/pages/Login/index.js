@@ -38,7 +38,6 @@ function LOGIN() {
             console.log(err)
             alert("Usuário não encontrado")
         })
-        console.log("qualquer coisa")
     }
 
     function Save() {
